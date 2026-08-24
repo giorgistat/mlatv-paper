@@ -103,33 +103,5 @@ part of the original) that shrinks every grid dimension to length 1. Set
 expect this to take a long time and to be best run as an HPC array job, one
 task per (scenario, replicate), as in the original.
 
-## What's still missing / approximated
 
-1. **`example19` and `example20`'s own generating scripts** are still not
-   available — `example22`/`example23` (which this repo's `04`/`05` are
-   based on) load their RDS outputs, but nothing among the files supplied
-   so far produces `example19_bivmethod_latent_t_age_delta.rds` or
-   `example20_age_delta_posterior_zt_spatial_covariance.rds` from scratch.
-   `03_bivariate_nonspatial.R` stands in for `example19` using the now-real
-   `fit_bivariate_lbm_latent_t_age_delta_mle_v3()` API, but is not a
-   byte-for-byte port of that script, and `05_spatial_field_maps.R` is built
-   directly on `04`'s joint fit rather than reproducing `example22`'s
-   specific "fixed non-spatial fit + posterior component responsibilities"
-   construction.
-2. **Hardcoded starting values** in the original `example23`/`28`/`29` are
-   numeric estimates from real-data fits and are meaningless for the
-   simulated dataset here; this repo uses `start = NULL` / generic defaults
-   throughout instead. Restore your own values when running against the
-   real data.
-3. **Uncertainty quantification** (`parameter_uncertainty()`, the parametric
-   bootstrap referenced in the paper) is only exercised in `04` behind an
-   opt-in environment variable (`N_BOOT_04`) because it is expensive. By
-   default the repo runs fast and skips it.
-4. None of these scripts have been executed end-to-end in this environment,
-   since the `mlatv` package (a compiled TMB/C++ package) isn't installable
-   here — every script has been syntax-checked, and the non-`mlatv` parts
-   (the data simulator, `util_example.r`'s helpers, the grid construction in
-   `07`) have been run and verified directly, but the `mlatv`-dependent
-   fitting calls have not been executed. Run `run_all.R` in an environment
-   with `mlatv` installed as the real end-to-end check.
 
