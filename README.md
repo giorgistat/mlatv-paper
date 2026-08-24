@@ -1,4 +1,4 @@
-# Bivariate geostatistical latent variable models — analysis code
+# Bivariate geostatistical latent variable models: analysis code
 
 This repository reproduces the analysis pipeline of *Bivariate geostatistical
 latent variable models for the analysis of antibody density data*
